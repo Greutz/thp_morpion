@@ -28,7 +28,7 @@ class Game
     if choix == "1" || choix == "2" || choix == "3" || choix == "4" || choix == "5" || choix == "6" || choix == "7" || choix == "8" || choix == "9"
       if @board.case_check(choix) == true 
         @board.board_change(choix, player.mark)
-        @turn_counter += 1
+        puts @turn_counter += 1
       else
         puts "\n\nErreur ! \nChoisi une case libre ;)"
         if player == @player1
@@ -82,7 +82,6 @@ class Game
   
   def end
     @board.board_state
-    @board.board_wipe
     if @board.player1_wins == true
       puts "\n\n\t\tVictoire de #{player1.name} !\n\n"
     elsif @board.player2_wins == true
@@ -90,6 +89,7 @@ class Game
     else
       puts "\n\n\t\tMATCH NUL"
     end
+    @board.board_wipe
     puts "\n\t\tVoulez-vous rejouer ?"
     puts "\n\t\tAppuez sur entrée pour continuer"
     puts "\n\t\tEntrez non pour quitter"
