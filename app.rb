@@ -8,7 +8,7 @@ require 'board'
 require 'board_case'
 
 
-puts "message de bienvenu"
+puts "\n\tBienvenue au meilleur morpion de la GALAXIE"
 
-new_game = Game.new.perform
+Game.new.perform
 
