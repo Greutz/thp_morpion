@@ -1,7 +1,9 @@
-class Board
-
+require 'player'
+# Classe gérant le board
+class Board < Player
   attr_accessor :array_case
 
+  # On crée les 9 cases et on les stockes dans un array
   def initialize
     @array_case = []
     @a1 = BoardCase.new("1")
@@ -15,22 +17,27 @@ class Board
     @c3 = BoardCase.new('9')
 
     @array_case = [@a1, @a2, @a3, @b1, @b2, @b3, @c1, @c2, @c3]
+    super(name, mark)
   end
 
+  # Méthode vérifiant la disponibilité d'une case
   def case_check(choix)
     @array_case.each do |elem|
       return true if elem.position == choix
     end
   end
 
+  # Méthode transformant le board via l'array
   def board_change(choix, mark)
     @array_case.map { |elem| elem.position == choix ? elem.position = mark : elem }
   end
 
+  # Méthode remettant le board à 0 après une partie
   def board_wipe
     @array_case.map.with_index { |elem, i| elem.position = (i + 1).to_s }
   end
 
+  # Méthode affichant le board
   def board_state
     puts "\n\t\t #{@a1.position} | #{@a2.position} | #{@a3.position}"
     puts "\t\t---+---+---"
@@ -39,51 +46,52 @@ class Board
     puts "\t\t #{@c1.position} | #{@c2.position} | #{@c3.position}"
   end
 
-  def player1_wins
-    if @a1.position == "X" && @a2.position == "X" && @a3.position == "X"
+  # Conditions de victoires (oui c'est très moche)
+  def player1_wins(mark)
+    if @a1.position == mark && @a2.position == mark && @a3.position == mark
       true
 
-    elsif @b1.position == "X" && @b2.position == "X" && @b3.position == "X"
+    elsif @b1.position == mark && @b2.position == mark && @b3.position == mark
       true
 
-    elsif @c1.position == "X" && @c2.position == "X" && @c3.position == "X"
+    elsif @c1.position == mark && @c2.position == mark && @c3.position == mark
       true
 
-    elsif @a1.position == "X" && @b1.position == "X" && @c1.position == "X"
+    elsif @a1.position == mark && @b1.position == mark && @c1.position == mark
       true
 
-    elsif @a2.position == "X" && @b2.position == "X" && @c2.position == "X"
+    elsif @a2.position == mark && @b2.position == mark && @c2.position == mark
       true
 
-    elsif @a3.position == "X" && @b3.position == "X" && @c3.position == "X"
+    elsif @a3.position == mark && @b3.position == mark && @c3.position == mark
       true
 
-    elsif @a1.position == "X" && @b2.position == "X" && @c3.position == "X"
+    elsif @a1.position == mark && @b2.position == mark && @c3.position == mark
       true
 
-    elsif @a3.position == "X" && @b2.position == "X" && @c1.position == "X"
+    elsif @a3.position == mark && @b2.position == mark && @c1.position == mark
       true
     else
       false
     end
   end
 
-  def player2_wins
-    if @a1.position == "O" && @a2 == "O" && @a3 == "O"
+  def player2_wins(mark)
+    if @a1.position == mark && @a2 == mark && @a3 == mark
       true
-    elsif @b1.position == "O" && @b2.position == "O" && @b3.position == "O"
+    elsif @b1.position == mark && @b2.position == mark && @b3.position == mark
       true
-    elsif @c1.position == "O" && @c2.position == "O" && @c3.position == "O"
+    elsif @c1.position == mark && @c2.position == mark && @c3.position == mark
       true
-    elsif @a1.position == "O" && @b1.position == "O" && @c1.position == "O"
+    elsif @a1.position == mark && @b1.position == mark && @c1.position == mark
       true
-    elsif @a2.position == "O" && @b2.position == "O" && @c2.position == "O"
+    elsif @a2.position == mark && @b2.position == mark && @c2.position == mark
       true
-    elsif @a3.position == "O" && @b3.position == "O" && @c3.position == "O"
+    elsif @a3.position == mark && @b3.position == mark && @c3.position == mark
       true
-    elsif @a1.position == "O" && @b2.position == "O" && @c3.position == "O"
+    elsif @a1.position == mark && @b2.position == mark && @c3.position == mark
       true
-    elsif @a3.position == "O" && @b2.position == "O" && @c1.position == "O"
+    elsif @a3.position == mark && @b2.position == mark && @c1.position == mark
       true
     else
       false
